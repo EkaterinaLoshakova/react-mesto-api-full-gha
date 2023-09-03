@@ -12,6 +12,6 @@
 
 IP 158.160.78.206
 
-Frontend https://https://mesto.kattrin.nomoredomainsicu.ru/
+Frontend https://mesto.kattrin.nomoredomainsicu.ru/
 
-Backend https://api.https://mesto.kattrin.nomoredomainsicu.ru/
+Backend https://api.mesto.kattrin.nomoredomainsicu.ru/
