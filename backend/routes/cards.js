@@ -1,62 +1,62 @@
-const cardRouter = require("express").Router();
-const { celebrate, Joi } = require("celebrate");
+const cardRouter = require('express').Router();
+const { celebrate, Joi } = require('celebrate');
 const {
   createCard,
   getCards,
   deleteCard,
   likeCard,
   dislikeCard,
-} = require("../controllers/cards");
+} = require('../controllers/cards');
 
-cardRouter.get("/", getCards);
+cardRouter.get('/', getCards);
 
 // cardRouter.delete('/:cardId', deleteCard)
 cardRouter.delete(
-  "/:cardId",
+  '/:cardId',
   celebrate({
     params: Joi.object().keys({
       cardId: Joi.string().length(24).hex().required(),
     }),
   }),
-  deleteCard
+  deleteCard,
 );
 
 // cardRouter.post('/', createCard);
 cardRouter.post(
-  "/",
+  '/',
   celebrate({
     body: Joi.object().keys({
       name: Joi.string().required().min(2).max(30),
       link: Joi.string()
         .required()
         .pattern(
-          /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=]*)$/
+          /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=]*)$/,
         ),
     }),
   }),
-  createCard
+  createCard,
 );
 
 // cardRouter.put("/:cardId/likes", likeCard);
 cardRouter.put(
-  "/:cardId/likes",
+  '/:cardId/likes',
   celebrate({
     params: Joi.object().keys({
       cardId: Joi.string().length(24).hex().required(),
     }),
   }),
-  likeCard
+  likeCard,
 );
 
 // cardRouter.delete("/:cardId/likes", dislikeCard);
 cardRouter.delete(
-  "/:cardId/likes",
+  '/:cardId/likes',
   celebrate({
     params: Joi.object().keys({
       cardId: Joi.string().length(24).hex().required(),
     }),
   }),
-  dislikeCard
+  dislikeCard,
 );
 
 // cardRouter.put("/cards/:cardId/likes", likeCard);

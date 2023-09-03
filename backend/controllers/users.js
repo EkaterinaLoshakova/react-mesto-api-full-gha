@@ -1,13 +1,13 @@
-const { HTTP_STATUS_OK, HTTP_STATUS_CREATED } = require("http2").constants;
-const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+const { HTTP_STATUS_OK, HTTP_STATUS_CREATED } = require('http2').constants;
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
-const { notFoundStatus } = require("../utils/constants");
-const User = require("../models/user");
-const NotFoundError = require("../errors/NotFoundError");
-const BadRequestError = require("../errors/BadRequestError");
-const ConflictError = require("../errors/ConflictError");
+const { notFoundStatus } = require('../utils/constants');
+const User = require('../models/user');
+const NotFoundError = require('../errors/NotFoundError');
+const BadRequestError = require('../errors/BadRequestError');
+const ConflictError = require('../errors/ConflictError');
 
 module.exports.getUsers = (req, res, next) => {
   User.find({})
@@ -27,22 +27,22 @@ module.exports.getUserById = (req, res, next) => {
       if (!user) {
         res
           .status(notFoundStatus)
-          .send({ message: "Пользователь по указанному _id не найден." });
+          .send({ message: 'Пользователь по указанному _id не найден.' });
         return;
       }
       res.send(user);
     })
     .catch((error) => {
       if (error instanceof mongoose.Error.CastError) {
-        next(new BadRequestError("Некорректный _id пользователя"));
+        next(new BadRequestError('Некорректный _id пользователя'));
         // res
         //   .status(badRequestStatus)
         //   .send({ message: "Некорректный _id карточки" });
       } else if (error instanceof mongoose.Error.DocumentNotFoundError) {
         next(
           new NotFoundError({
-            message: "Пользователь по указанному _id не найден.",
-          })
+            message: 'Пользователь по указанному _id не найден.',
+          }),
         );
         // res
         //   .status(serverErrorStatus)
@@ -57,50 +57,48 @@ module.exports.getUserById = (req, res, next) => {
 };
 
 module.exports.addUser = (req, res, next) => {
-  const { name, about, avatar, email, password } = req.body;
+  const {
+    name, about, avatar, email, password,
+  } = req.body;
   bcrypt
     .hash(password, 10)
     // User.create({ name, about, avatar })
-    .then((hash) =>
-      User.create({
-        name,
-        about,
-        avatar,
-        email,
-        password: hash,
-      })
-        .then((user) =>
-          res.status(HTTP_STATUS_CREATED).send({
-            name: user.name,
-            about: user.about,
-            avatar: user.avatar,
-            _id: user._id,
-            email: user.email,
-          })
-        )
-        .catch((error) => {
-          // if (error instanceof mongoose.Error.ValidationError) {
-          //   // res.status(badRequestStatus).send({ message: error.message });
-          //   next(new BadRequestError(error.message));
-          // } else {
-          //   // res
-          //   //   .status(serverErrorStatus)
-          //   //   .send({ message: "На сервере произошла ошибка" });
-          //   next(error);
-          // }
-          if (error.code === 11000) {
-            next(
-              new ConflictError(
-                "Пользователь с таким email уже зарегистрирован"
-              )
-            );
-          } else if (error instanceof mongoose.Error.ValidationError) {
-            next(new BadRequestError(error.message));
-          } else {
-            next(error);
-          }
-        })
-    );
+    .then((hash) => User.create({
+      name,
+      about,
+      avatar,
+      email,
+      password: hash,
+    })
+      .then((user) => res.status(HTTP_STATUS_CREATED).send({
+        name: user.name,
+        about: user.about,
+        avatar: user.avatar,
+        _id: user._id,
+        email: user.email,
+      }))
+      .catch((error) => {
+        // if (error instanceof mongoose.Error.ValidationError) {
+        //   // res.status(badRequestStatus).send({ message: error.message });
+        //   next(new BadRequestError(error.message));
+        // } else {
+        //   // res
+        //   //   .status(serverErrorStatus)
+        //   //   .send({ message: "На сервере произошла ошибка" });
+        //   next(error);
+        // }
+        if (error.code === 11000) {
+          next(
+            new ConflictError(
+              'Пользователь с таким email уже зарегистрирован',
+            ),
+          );
+        } else if (error instanceof mongoose.Error.ValidationError) {
+          next(new BadRequestError(error.message));
+        } else {
+          next(error);
+        }
+      }));
 };
 
 module.exports.editUserData = (req, res, next) => {
@@ -109,7 +107,7 @@ module.exports.editUserData = (req, res, next) => {
   User.findByIdAndUpdate(
     req.user._id,
     { name, about },
-    { new: "true", runValidators: true }
+    { new: 'true', runValidators: true },
   )
     .then((user) => res.send(user))
     .catch((error) => {
@@ -122,8 +120,8 @@ module.exports.editUserData = (req, res, next) => {
         //   .send({ message: "Пользователь по указанному _id не найден." });
         next(
           new NotFoundError({
-            message: "Пользователь по указанному _id не найден.",
-          })
+            message: 'Пользователь по указанному _id не найден.',
+          }),
         );
       } else {
         next(error);
@@ -139,7 +137,7 @@ module.exports.editUserAvatar = (req, res, next) => {
   User.findByIdAndUpdate(
     req.user._id,
     { avatar: req.body.avatar },
-    { new: "true", runValidators: true }
+    { new: 'true', runValidators: true },
   )
     .then((user) => res.send(user))
     .catch((error) => {
@@ -152,8 +150,8 @@ module.exports.editUserAvatar = (req, res, next) => {
         //   .send({ message: "Пользователь по указанному _id не найден." });
         next(
           new NotFoundError({
-            message: "Пользователь по указанному _id не найден.",
-          })
+            message: 'Пользователь по указанному _id не найден.',
+          }),
         );
       } else {
         next(error);
@@ -168,7 +166,7 @@ module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, "key", { expiresIn: "7d" });
+      const token = jwt.sign({ _id: user._id }, 'key', { expiresIn: '7d' });
       res.send({ token });
     })
     .catch((error) => {
