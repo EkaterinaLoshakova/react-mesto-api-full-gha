@@ -26,16 +26,15 @@ function LikeContainer({ likes, myId, cardId }) {
   }
 
   useEffect(() => {
-    setIsLike(likes.some((like) => myId === like._id));
+    setIsLike(likes.some((like) => myId === like));
   }, [likes, myId]);
 
   return (
     <>
       <button
-        className={
-          "like-container__button-like " +
-          `${isLike && "like-container__button-like_active"}`
-        }
+        className={`like-container__button-like ${
+          isLike && "like-container__button-like_active"
+        }`}
         onClick={handleLikes}
       />
       <p className="like-container__counter">{counter}</p>

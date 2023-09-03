@@ -218,7 +218,6 @@ function App() {
 
   useEffect(() => {
     if (localStorage.jwt) {
-      console.log(localStorage.jwt);
       getToken(localStorage.jwt)
         .then((res) => {
           setUserEmail(res.email);

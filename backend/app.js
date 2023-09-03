@@ -26,7 +26,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.connect("mongodb://127.0.0.1:27017/mesto");
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3005 } = process.env;
 
 app.use(requestLogger);
 app.use(limiter);
