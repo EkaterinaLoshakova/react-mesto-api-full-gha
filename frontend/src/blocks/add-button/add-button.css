@@ -1,0 +1,19 @@
+.add-button {
+  background-image: url(../../images/pluse.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 150px;
+  height: 50px;
+  background-color: black;
+  border: 2px solid #FFFFFF;
+  border-radius: 2px;
+  align-self: center;
+  box-sizing: border-box;
+  justify-self: end;
+}
+
+@media screen and (max-width: 1279px){
+  .add-button {
+    width: 100%;
+  }
+}

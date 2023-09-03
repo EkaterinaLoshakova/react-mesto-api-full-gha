@@ -1,0 +1,11 @@
+.page__margin-left-right {
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
+@media screen and (max-width: 1280px) {
+  .page__margin-left-right {
+    margin-left: calc(19px + (200 - 19) * ((100vw - 320px) / (1280 - 320)));
+    margin-right: calc(19px + (200 - 19) * ((100vw - 320px) / (1280 - 320)));
+  }
+}

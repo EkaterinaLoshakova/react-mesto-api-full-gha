@@ -1,0 +1,18 @@
+.header__margin {
+  margin: 0px 200px 40px;
+  padding-top: 45px;
+}
+
+@media screen and (max-width: 1280px) {
+  .header__margin {
+  margin-left: calc(200 * ((100vw - 320px) / (1280 - 320)));
+  margin-right: calc(200 * ((100vw - 320px) / (1280 - 320)));
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header__margin {
+    margin-bottom: 42px;
+    padding-top: 28px;
+  }
+}

@@ -1,0 +1,12 @@
+.popup__container_type_image {
+  max-height: 75vh;
+  max-width: 75vw;
+  object-fit: cover;
+  object-position: center;
+  position: relative;
+  background: none;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  margin: auto auto;
+}

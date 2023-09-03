@@ -1,0 +1,8 @@
+.photo-gallery__wrapper {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 25px 15px 26px 21px;
+  align-items: center;
+}

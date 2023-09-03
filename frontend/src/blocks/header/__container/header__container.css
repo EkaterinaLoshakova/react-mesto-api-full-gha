@@ -1,0 +1,5 @@
+.header__container {
+  display: flex;
+  padding-top: 10px;
+  gap: 24px;
+}
