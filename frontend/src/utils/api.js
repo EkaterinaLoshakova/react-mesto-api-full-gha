@@ -109,7 +109,8 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: "http://127.0.0.1:3000",
+  baseUrl: "https://mesto.kattrin.nomoredomainsicu.ru/sign-up",
+  // baseUrl: "http://127.0.0.1:3000",
   // headers: {
   //   authorization: "a40765c6-fe1b-44c0-b3c0-355a192bdaad",
   //   "Content-Type": "application/json",

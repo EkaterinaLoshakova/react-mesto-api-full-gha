@@ -1,4 +1,5 @@
-const baseUrl = "http://127.0.0.1:3000";
+const baseUrl = "https://mesto.kattrin.nomoredomainsicu.ru";
+// const baseUrl = "http://127.0.0.1:3000";
 
 function getResponseData(res) {
   if (!res.ok) {
